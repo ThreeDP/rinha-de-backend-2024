@@ -1,0 +1,83 @@
+version: "3"
+
+services:
+  api-one: &api
+    container_name: api-one
+    image: go-api
+    build:
+      context: ./go
+    hostname: api-one
+    environment:
+      DB_HOSTNAME: "db"
+    ports:
+      - "8081:8081"
+    depends_on:
+      - db
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "200MB"
+
+  api-two:
+    <<: *api
+    container_name: api-two
+    hostname: api-two
+    ports:
+      - "8082:8081"
+
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    volumes:
+      - ./nginx-volume:/etc/nginx/:ro
+    depends_on:
+      - api-one
+      - api-two
+    ports:
+      - "9999:9999"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.17"
+          memory: "10MB"
+
+  db:
+    container_name: db
+    image: postgres:16.1-alpine
+    hostname: db
+    environment:
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_DB: "${POSTGRES_DB}"
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-volume:/docker-entrypoint-initdb.d/
+    deploy:
+      resources:
+        limits:
+          cpus: "0.13"
+          memory: "140MB"
+
+volumes:
+  nginx-volume:
+    name: nginx-volume
+    driver: local
+    driver_opts:
+      type: node
+      o: bind
+      device: ./requirements/nginx/
+  
+  db-volume:
+    name: db-volume
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./requirements/db/
+
+networks:
+  default:
+    driver: bridge
+    name: rinha-nginx-2024q1
