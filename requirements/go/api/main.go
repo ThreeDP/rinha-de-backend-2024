@@ -10,9 +10,9 @@ import (
 const PORT string = ":8080"
 
 func main() {
-
-	handler := http.HandlerFunc(route.BankServer)
-	if err := http.ListenAndServe(PORT, handler); err != nil {
+	db := route.DBQueries{}
+	server := &route.BankServer{Store: &db}
+	if err := http.ListenAndServe(PORT, server); err != nil {
 		log.Fatalf("could not listen on port 5000 %v", err)
 	}
 	fmt.Printf("Listen on Port: %s\n", PORT)

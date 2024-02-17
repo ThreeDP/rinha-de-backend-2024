@@ -23,25 +23,6 @@ type DBTransations struct {
 	Transation TransationsResponse
 }
 
-var ExpectedTransations = map[int]DBTransations{
-	1: {
-		ID: 1,
-		Transation: TransationsResponse{
-			Balance: Balance{Total: -9098, CreateAt: "2024-01-17T02:34:41.217753Z", Limit: 1000000},
-			LatestTransactions: []Transation{
-				{Value: 10, Type: 'c', Description: "descricao", CreateAt: "2024-01-17T02:34:38.543030Z"},
-				{Value: 90000, Type: 'd', Description: "descricao", CreateAt: "2024-01-17T02:34:38.543030Z"},
-			},
-		},
-	},
-	2: {
-		ID: 2,
-		Transation: TransationsResponse{
-			Balance: Balance{Total: 999900, CreateAt: "2024-01-17T02:34:41.217753Z", Limit: 49990},
-			LatestTransactions: []Transation{
-				{Value: 10, Type: 'c', Description: "descricao", CreateAt: "2024-01-17T02:34:38.543030Z"},
-				{Value: 100, Type: 'd', Description: "descricao", CreateAt: "2024-01-17T02:34:38.543030Z"},
-			},
-		},
-	},
+type IDBQueries interface {
+	GetTransations(id int) ([]byte, error) 
 }
