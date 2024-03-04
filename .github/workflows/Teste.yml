@@ -10,8 +10,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      working-directory: ./requirements/go/api
       - uses: actions/checkout@v4
+        working-directory: ./requirements/go/api
       - name: Set up Go 1.22
         uses: actions/setup-go@v4
         with:
