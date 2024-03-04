@@ -1,0 +1,32 @@
+name: Test and coverage
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    working-directory: ./requirements/go/api
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Go 1.22
+      uses: actions/setup-go@v4
+      with:
+        go-version: 1.22
+    - name: Try Build
+      run: make
+    - name: Unit Tests
+      run: make unit
+    - name: Coverage
+      run: make coverage
+    - name: Bechmark Tests
+      run: make benchmark
+    - name: Upload coverage reports to Codecov
+      users: codecov/codecov-action@v4.0.1
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      with:
+        file: ./coverage.txt

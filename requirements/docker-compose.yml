@@ -67,7 +67,7 @@ volumes:
     driver_opts:
       type: node
       o: bind
-      device: ./requirements/nginx/
+      device: ./nginx/
   
   db-volume:
     name: db-volume
@@ -75,7 +75,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ./requirements/db/
+      device: ./db/
 
 networks:
   default:
