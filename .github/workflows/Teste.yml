@@ -10,25 +10,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      working-directory: ./requirements/go/api
       - uses: actions/checkout@v4
       - name: Set up Go 1.22
         uses: actions/setup-go@v4
         with:
           go-version: 1.22
+
       - name: Try build
-        working-directory: ./requirements/go/api
         run: make
+
       - name: Unit tests
-        working-directory: ./requirements/go/api
         run: make unit
+
       - name: Coverage
-        working-directory: ./requirements/go/api
         run: make coverage
+      
       - name: Benchmark tests
-        working-directory: ./requirements/go/api
         run: make benchmark
+
       - name: Upload coverage reports to Codecov
-        working-directory: ./requirements/go/api
         uses: codecov/codecov-action@v4.0.1
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
