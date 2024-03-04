@@ -1,4 +1,5 @@
 [![Test and coverage](https://github.com/ThreeDP/rinha-de-backend-2024/actions/workflows/Teste.yml/badge.svg)](https://github.com/ThreeDP/rinha-de-backend-2024/actions/workflows/Teste.yml)
+[![codecov](https://codecov.io/github/ThreeDP/rinha-de-backend-2024/graph/badge.svg?token=ATN3IPF3VK)](https://codecov.io/github/ThreeDP/rinha-de-backend-2024)
 # Rinha de Backend 2024
 ![this is fine](https://media.licdn.com/dms/image/C4E12AQGEy0nHsryvOg/article-cover_image-shrink_720_1280/0/1561242730098?e=2147483647&v=beta&t=Zvez_D5lTF6HeyMW9_KSObThHV1sRQY62sQo-QXyuRk)
 O desafio para a rinha de backend 2024 / Q1 é sobre controle de concorrência em servições de crédito e débitos bancários.
