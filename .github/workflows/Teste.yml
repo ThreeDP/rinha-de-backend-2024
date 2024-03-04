@@ -25,7 +25,7 @@ jobs:
     - name: Bechmark Tests
       run: make benchmark
     - name: Upload coverage reports to Codecov
-      users: codecov/codecov-action@v4.0.1
+      uses: codecov/codecov-action@v4.0.1
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       with:
