@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-  
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,13 +16,13 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: 1.22
-      - name: Try Build
+      - name: Try build
         run: make
-      - name: Unit Tests
+      - name: Unit tests
         run: make unit
       - name: Coverage
         run: make coverage
-      - name: Bechmark Tests
+      - name: Benchmark tests
         run: make benchmark
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4.0.1
